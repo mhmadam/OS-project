@@ -1,4 +1,10 @@
 # # # # # # # # # # # # # # # # START # # # # # # # # # # # # # # #
+import kivy
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
+from kivy.lang import Builder
+
 # print process result
 def printprocess(process):
 #     sort processes by number 
@@ -207,6 +213,20 @@ def hrrn(process):
     return
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
+Builder.load_file('kvdesign/OS_project.kv')
+
+class layout(Widget):
+    pass
+        
+
+class OSproject(App):
+    def build(self):
+        return mylayout()
+
+
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # process = [[1, 6, 0, 0, 0], [5, 7, 0, 0, 1], [3, 0, 0, 0, 2], [4, 2, 0, 0, 3], [2, 2, 0, 0, 4], [4, 8, 0, 0, 5], [3, 7, 0, 0, 6]]
 # process = [[1, 6, 0, 0, 0], [2, 2, 0, 0, 1], [3, 0, 0, 0, 2], [4, 10, 0, 0, 3], [5, 7, 0, 0, 4], [6, 5, 0, 0, 5]]
@@ -220,66 +240,70 @@ def hrrn(process):
 # process = [[3, 1, 0, 0, 0], [2, 5, 0, 0, 1], [4, 9, 0, 0, 2]]
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-pr = True
-process = []
-n = int(input('Number of process: '))
-for i in range(n):
-    
-    cbt = float(input(f'Process no {i+1} cpu burst time: '))
-    if (cbt - int(cbt) == 0):
-        cbt = int(cbt)
-    if cbt == 0:
-        pr = False
-        print('Wrong cpu burst time!')
-        break
-    process.append([cbt])
-    
-    artime = float(input(f'Process no {i+1} arrival time: '))
-    if (artime - int(artime) == 0):
-        artime = int(artime)
-    process[i].append(artime)
-    
-    process[i].extend([0, 0, i])
+# pr = True
+# process = []
+# n = int(input('Number of process: '))
+# for i in range(n):
+#     
+#     cbt = float(input(f'Process no {i+1} cpu burst time: '))
+#     if (cbt - int(cbt) == 0):
+#         cbt = int(cbt)
+#     if cbt == 0:
+#         pr = False
+#         print('Wrong cpu burst time!')
+#         break
+#     process.append([cbt])
+#     
+#     artime = float(input(f'Process no {i+1} arrival time: '))
+#     if (artime - int(artime) == 0):
+#         artime = int(artime)
+#     process[i].append(artime)
+#     
+#     process[i].extend([0, 0, i])
+# 
+# if pr:
+#     a = int(input('Enter algoritm number: \n1.SJF\n2.FIFO\n3.Round Robin\n4.SRT\n5.HRRN\n'))
+#     if a == 3:
+#         t = float(input('Enter time quantum: '))
+#         if (t - int(t) == 0):
+#             t = int(t)
+# 
+#     print('ok!')
+# 
+# # # # # SJF algorithm # # # #
+#     if a == 1:
+#         sjf(process)
+# 
+# # # # # FIFO algorithm # # # #
+#     elif a == 2:
+#         fifo(process)
+# 
+# # # # # RR algorithm # # # #
+#     elif a == 3:
+#         round_robin(t, process)
+# 
+# # # # # SRT algorithm # # # #
+#     elif a == 4:
+#         srt(process)
+# 
+# # # # # HRRN algorithm # # # #
+#     elif a == 5:
+#         hrrn(process)
+# 
+#     else:
+#         pr = False
+#         print('Algoritm not available!')
+# 
+#     if pr:
+# #         calculate process waiting time
+#         process = waiting(process)
+# #         print process
+#         printprocess(process)
+# #         calculate and print average
+#         av = avg(process)
+#         print('Average of waiting time:', format(av[0], ".3f"))
+#         print('Average of response time:', format(av[1], ".3f"))
+        
 
-if pr:
-    a = int(input('Enter algoritm number: \n1.SJF\n2.FIFO\n3.Round Robin\n4.SRT\n5.HRRN\n'))
-    if a == 3:
-        t = float(input('Enter time quantum: '))
-        if (t - int(t) == 0):
-            t = int(t)
-
-    print('ok!')
-
-# # # # SJF algorithm # # # #
-    if a == 1:
-        sjf(process)
-
-# # # # FIFO algorithm # # # #
-    elif a == 2:
-        fifo(process)
-
-# # # # RR algorithm # # # #
-    elif a == 3:
-        round_robin(t, process)
-
-# # # # SRT algorithm # # # #
-    elif a == 4:
-        srt(process)
-
-# # # # HRRN algorithm # # # #
-    elif a == 5:
-        hrrn(process)
-
-    else:
-        pr = False
-        print('Algoritm not available!')
-
-    if pr:
-#         calculate process waiting time
-        process = waiting(process)
-#         print process
-        printprocess(process)
-#         calculate and print average
-        av = avg(process)
-        print('Average of waiting time:', format(av[0], ".3f"))
-        print('Average of response time:', format(av[1], ".3f"))
+if __name__ == '__main__':
+    OSproject().run()
